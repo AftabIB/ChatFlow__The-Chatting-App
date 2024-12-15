@@ -91,7 +91,7 @@ cd <project-name>
 Run the following command to install all required modules:
 
 ```bash
-npm install
+npm install or npm i
 # Or, if you prefer yarn:
 yarn install
 ```
@@ -103,7 +103,7 @@ yarn install
 Start the development server with:
 
 ```bash
-npm run dev
+npm run dev (for both Backend and frontend)
 # Or, if you prefer yarn:
 yarn dev
 ```
@@ -178,8 +178,3 @@ git push -u origin main
 - [Vite Documentation](https://vitejs.dev/guide/)
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [GitHub Docs](https://docs.github.com/)
-
-If you encounter any issues, feel free to consult the documentation or reach out to your team for support.
-```
-
-This combined file includes both the **ChatFlow** project details and the **React + Vite App Installation Guide** in one `README.md`. You can copy and paste this content into your `.md` file. Let me know if you'd like any adjustments!
