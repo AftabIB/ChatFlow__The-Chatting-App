@@ -52,8 +52,6 @@ git --version
 
 ---
 
-# Installation Guidelines
-
 ### 1. Clone the Repository (If applicable)
 If the project already exists on GitHub, clone it using:
 
