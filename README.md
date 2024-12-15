@@ -8,7 +8,7 @@ ChatFlow is a modern, real-time chatting application built using React, Vite, an
 - **React + Vite**: A fast, modern development environment powered by Vite, combined with React for building dynamic and interactive UIs.
 - **TailwindCSS**: Utility-first CSS framework for rapid UI development, ensuring the app is responsive and customizable.
 - **DaisyUI**: A plugin for TailwindCSS that provides a set of beautiful, pre-styled components, making UI design faster and more accessible.
-- **Lucid React**: A state management library designed to make the React application easier to handle, with clean and predictable behavior.
+- **Lucide React**: A state management library designed to make the React application easier to handle, with clean and predictable behavior.
 - **Zustand**: A minimalistic state management library for React, which makes managing global state in the app smooth and efficient.
 - **Socket.io**: A library to enable real-time, bi-directional communication between clients and servers, facilitating instant messaging.
 
