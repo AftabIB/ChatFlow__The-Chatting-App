@@ -1,61 +1,62 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import { axiosInstance } from "../lib/axios.js";
+import { axiosInstance } from "../lib/axios";
 
-// Create the Zustand store for chat management
+export const useChatStore = create((set, get) => ({
+  messages: [],
+  users: [],
+  selectedUser: null,
+  isUsersLoading: false,
+  isMessagesLoading: false,
 
-export const useChatStore = create((set) => ({
-  messages: [], // Holds the list of messages
-  users: [], // Holds the list of users
-  selectedUser: null, // Holds the currently selected user
-  isUsersLoading: false, // Indicates if the users are loading
-  isMessagesLoading: false, // Indicates if the messages are loading
-
-  // Users Fetch function: fetch users from the API
+  // Fetch users
   getUsers: async () => {
-    // Set loading state before making the API request
     set({ isUsersLoading: true });
     try {
-      // Fetch the users data from the API
       const res = await axiosInstance.get("/messages/users");
-
-      // Update the users state with the fetched data
       set({ users: res.data });
     } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("An unexpected error occurred.");
-      }
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to load users. Please try again."
+      );
     } finally {
-      // Set loading state to false after the API request completes
       set({ isUsersLoading: false });
     }
   },
 
-  // Messages Fetch function: fetch messages for selected user
+  // Fetch messages for the selected user
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-      // Fetch the messages data for the given userId
       const res = await axiosInstance.get(`/messages/${userId}`);
-      // Update the messages state with the fetched data
       set({ messages: res.data });
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("An unexpected error occurred. Please try again.");
-      }
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to load messages. Please try again."
+      );
     } finally {
       set({ isMessagesLoading: false });
     }
   },
 
-  // Function to set the currently selected user
-  setSelected: async (selectedUser) => set({ selectedUser }),
+  // Send a new message
+  sendMessage: async (messageData) => {
+    const { selectedUser, messages } = get();
+    try {
+      const res = await axiosInstance.post(
+        `/messages/send/${selectedUser._id}`,
+        messageData
+      );
+      set({ messages: [...messages, res.data] });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
+
+  // Set the currently selected user
+  setSelectedUser: (selectedUser) => {
+    set({ selectedUser });
+  },
 }));

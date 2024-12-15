@@ -38,7 +38,7 @@ export const getMessages = async (req, res) => {
 
         // receiver is the sender
         { senderId: userToChatId, receiverId: myId },
-      ],
+      ]
     });
 
     //get all messages
@@ -54,32 +54,33 @@ export const sendMessage = async (req, res) => {
     //message could be text or image
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
-    const myId = req.user._id;
+    const senderId = req.user._id;
 
     let imageUrl;
     // if image is to be sent, upload it on the cloudinary
     if (image) {
-      //Upload base64 image to cloudinary
-      const uploadResponse = await cloudinary.uploader.upload({ image });
+      // Upload base64 image to cloudinary
+      const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.secure_url;
     }
 
-    // creating the message (may inlcude the image)
+    // creating the message (may include the image)
     const newMessage = new Message({
-      myId,
+      senderId,
       receiverId,
       text,
       image: imageUrl,
     });
 
-    //save the message
+    // save the message
     await newMessage.save();
 
     // todo: realtime functionality by using => socket.io
 
     res.status(201).json(newMessage);
   } catch (error) {
-    console.log("Error in sendMessages: ", error.message);
+    console.log("Error in sendMessages controller: ", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+

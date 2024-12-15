@@ -8,5 +8,4 @@ DaisyUI
 Lucid react
 socket.io
 hot toast
-multer 
 mongoose
