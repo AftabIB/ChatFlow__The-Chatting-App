@@ -173,8 +173,29 @@ git push -u origin main
 
 ---
 
+## Environment Variables Setup
+
+To configure the application, create a `.env` file in the root directory of your project with the following variables:
+
+```env
+MONGODB_URI=<Your MongoDB URI>
+PORT=5001
+JWT_SECRET=<Your JWT Secret>
+
+CLOUDINARY_CLOUD_NAME=<Your Cloudinary Cloud Name>
+CLOUDINARY_API_KEY=<Your Cloudinary API Key>
+CLOUDINARY_API_SECRET=<Your Cloudinary API Secret>
+
+NODE_ENV=development
+```
+
+Replace `<...>` with your actual credentials and settings. These environment variables are critical for the backend configuration and external service integrations.
+
+---
+
 ## Additional Resources
 
 - [Vite Documentation](https://vitejs.dev/guide/)
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [GitHub Docs](https://docs.github.com/)
+
