@@ -1,6 +1,3 @@
-You can merge both guides into one file by organizing them with appropriate headings and sections. Here is how you can combine the **React + Vite App Installation Guide** and the **ChatFlow - The Chatting App** repository description into a single `.md` file:
-
-```markdown
 # ChatFlow - The Chatting App
 
 ChatFlow is a modern, real-time chatting application built using React, Vite, and a range of powerful technologies for seamless communication. It provides an intuitive and responsive interface, leveraging state-of-the-art tools for the frontend and backend.
