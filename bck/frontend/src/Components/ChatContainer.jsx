@@ -1,42 +1,23 @@
-import React, { useEffect, useRef } from "react";
-import { useChatStore } from "../store/useChatStore";
-import ChatHeader from "./ChatHeader.jsx";
-import MessageInput from "./MessageInput.jsx";
-import MessageSkeleton from "./skeletons/MessageSkeleton.jsx";
+import React, { useEffect } from 'react'
+import { useChatStore } from '../store/useChatStore'
+import ChatHeader from './ChatHeader.jsx';
+import MessageInput from './MessageInput.jsx';
+import MessageSkeleton from './skeletons/MessageSkeleton.jsx';
 import { useAuthStore } from "../store/useAuthStore";
-import { formatMessageTime } from "../lib/utils.js";
+import {formatMessageTime} from "../lib/utils.js";
 
 const ChatContainer = () => {
   //fetch the messages
-  const {
-    messages,
-    getMessages,
-    isMessagesLoading,
-    selectedUser,
-    subscribeToMsg,
-    unSubscribeToMsg,
-  } = useChatStore();
-  const { authUser } = useAuthStore();
-  const messageEndRef = useRef(null);
-
+  const {messages, getMessages, isMessagesLoading, selectedUser} = useChatStore();
+  const {authUser} = useAuthStore();
+  
   //we fetch the messages by, which current user is selected
   useEffect(() => {
-    getMessages(selectedUser._id); //select the user by id
-
-    subscribeToMsg();
-
-    return () => unSubscribeToMsg();
-  }, [selectedUser._id, getMessages, subscribeToMsg, unSubscribeToMsg]);
-
-  //auto scroll to end whenever new msg delivers
-  useEffect(() => {
-    if (messageEndRef.current && messages) {
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
-
-  //msg skeleton loading
-  if (isMessagesLoading) {
+    getMessages(selectedUser._id)   //select the user by id 
+  },[selectedUser._id, getMessages]);
+  
+  //msg skeleton loading 
+  if(isMessagesLoading) {
     return (
       <div className="flex flex-1 flex-col overflow-auto">
         <ChatHeader />
@@ -57,7 +38,6 @@ const ChatContainer = () => {
             className={`chat ${
               message.senderId === authUser._id ? "chat-end" : "chat-start"
             }`}
-            ref={messageEndRef}
           >
             <div className=" chat-image avatar">
               <div className="size-10 rounded-full border">
@@ -93,6 +73,6 @@ const ChatContainer = () => {
       <MessageInput />
     </div>
   );
-};
+}
 
-export default ChatContainer;
+export default ChatContainer

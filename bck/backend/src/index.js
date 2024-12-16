@@ -5,11 +5,10 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import cors from "cors";
-import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-// const app = express();
+const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
 
 // Middleware
@@ -31,7 +30,7 @@ connectDB()
   .then(() => {
     console.log("Database connected successfully");
     // Start Server
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Server is running on Port: ${PORT}`);
     });
   })
